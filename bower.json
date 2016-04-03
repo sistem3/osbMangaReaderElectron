@@ -1,0 +1,27 @@
+{
+  "name": "osb-manga-reader",
+  "version": "0.0.1",
+  "dependencies": {
+    "es6-promise": "~3.0.2",
+    "fetch": "~0.10.1",
+    "scrollmagic": "~2.0.5",
+    "font-awesome": ">=4.1.0",
+    "bootstrap": "~3.1.1",
+    "bootstrap-sass-official": "~3.1.1",
+    "Swiper": "swiper#~3.3.0",
+    "osbMangaReader": "sistem3/osbMangaReaderNg2#~0.0.3"
+  },
+  "authors": [
+    "Ben Burton <sistematic3@yahoo.co.uk>"
+  ],
+  "description": "Angular 2 Application for reading Manga",
+  "license": "MIT",
+  "ignore": [
+    ".gitignore",
+    "Gruntfile.js",
+    "*.json",
+    "*.md",
+    "/src/*",
+    "/node_modules/*"
+  ]
+}
