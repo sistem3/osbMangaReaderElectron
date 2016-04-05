@@ -7,29 +7,26 @@
   </head>
   <body>
     <main class="container">
-      <!--<header>
-        <nav class="container-fluid">
-          <h1>osbMangaReader</h1>
-        </nav>
-      </header>-->
       <osb-manga-reader></osb-manga-reader>
-      <!--<footer>
-        <section class="container">
-          <p>We are using node <script>document.write(process.versions.node)</script>,
-            Chromium <script>document.write(process.versions.chrome)</script>,
-            and Electron <script>document.write(process.versions.electron)</script>.</p>
-        </section>
-      </footer>-->
     </main>
 
-    <script src="https://rawgithub.com/systemjs/systemjs/0.19.6/dist/system.js"></script>
+    <!--<script src="bower_components/system.js/dist/system.js"></script>
+    <script src="node_modules/typescript/lib/typescript.js"></script>
+    <script src="node_modules/angular2/bundles/angular2-polyfills.min.js"></script>
+    <script src="node_modules/rxjs/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/angular2/bundles/http.min.js"></script>-->
+
+    <script src="bower_components/system.js/dist/system.js"></script>
     <script src="https://code.angularjs.org/tools/typescript.js"></script>
     <script src="https://code.angularjs.org/2.0.0-beta.0/angular2-polyfills.js"></script>
     <script src="https://code.angularjs.org/2.0.0-beta.0/Rx.js"></script>
     <script src="https://code.angularjs.org/2.0.0-beta.0/angular2.dev.js"></script>
     <script src="https://code.angularjs.org/2.0.0-beta.0/http.js"></script>
+
     <script src="bower_components/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
     <script src="bower_components/Swiper/dist/js/swiper.min.js"></script>
+    <script src="src/config.js"></script>
 
     <script>
       System.config({
@@ -45,191 +42,6 @@
           ng.bootstrap(src.osbMangaReader);
         });
       });
-    </script>
-
-    <script>
-      const remote = require('electron').remote;
-      const Menu = remote.Menu;
-      const MenuItem = remote.MenuItem;
-
-      var template = [
-        {
-          label: 'Edit',
-          submenu: [
-            {
-              label: 'Undo',
-              accelerator: 'CmdOrCtrl+Z',
-              role: 'undo'
-            },
-            {
-              label: 'Redo',
-              accelerator: 'Shift+CmdOrCtrl+Z',
-              role: 'redo'
-            },
-            {
-              type: 'separator'
-            },
-            {
-              label: 'Cut',
-              accelerator: 'CmdOrCtrl+X',
-              role: 'cut'
-            },
-            {
-              label: 'Copy',
-              accelerator: 'CmdOrCtrl+C',
-              role: 'copy'
-            },
-            {
-              label: 'Paste',
-              accelerator: 'CmdOrCtrl+V',
-              role: 'paste'
-            },
-            {
-              label: 'Select All',
-              accelerator: 'CmdOrCtrl+A',
-              role: 'selectall'
-            }
-          ]
-        },
-        {
-          label: 'View',
-          submenu: [
-            {
-              label: 'Reload',
-              accelerator: 'CmdOrCtrl+R',
-              click: function(item, focusedWindow) {
-                if (focusedWindow)
-                  focusedWindow.reload();
-              }
-            },
-            {
-              label: 'Next Page',
-              accelerator: 'CmdOrCtrl+>',
-              click: function(item, focusedWindow) {
-                console.log('Go next page');
-              }
-            },
-            {
-              label: 'Prev Page',
-              accelerator: 'CmdOrCtrl+<',
-              click: function(item, focusedWindow) {
-                console.log('Go prev page');
-              }
-            },
-            {
-              label: 'Toggle Full Screen',
-              accelerator: (function() {
-                if (process.platform == 'darwin')
-                  return 'Ctrl+Command+F';
-                else
-                  return 'F11';
-              })(),
-              click: function(item, focusedWindow) {
-                if (focusedWindow)
-                  focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
-              }
-            },
-            {
-              label: 'Toggle Developer Tools',
-              accelerator: (function() {
-                if (process.platform == 'darwin')
-                  return 'Alt+Command+I';
-                else
-                  return 'Ctrl+Shift+I';
-              })(),
-              click: function(item, focusedWindow) {
-                if (focusedWindow)
-                  focusedWindow.toggleDevTools();
-              }
-            }
-          ]
-        },
-        {
-          label: 'Window',
-          role: 'window',
-          submenu: [
-            {
-              label: 'Minimize',
-              accelerator: 'CmdOrCtrl+M',
-              role: 'minimize'
-            },
-            {
-              label: 'Close',
-              accelerator: 'CmdOrCtrl+W',
-              role: 'close'
-            },
-          ]
-        },
-        {
-          label: 'Help',
-          role: 'help',
-          submenu: [
-            {
-              label: 'Learn More',
-              click: function() { require('electron').shell.openExternal('http://electron.atom.io') }
-            }
-          ]
-        }
-      ];
-
-      if (process.platform == 'darwin') {
-        var name = require('electron').remote.app.getName();
-        template.unshift({
-          label: name,
-          submenu: [
-            {
-              label: 'About ' + name,
-              role: 'about'
-            },
-            {
-              type: 'separator'
-            },
-            {
-              label: 'Services',
-              role: 'services',
-              submenu: []
-            },
-            {
-              type: 'separator'
-            },
-            {
-              label: 'Hide ' + name,
-              accelerator: 'Command+H',
-              role: 'hide'
-            },
-            {
-              label: 'Hide Others',
-              accelerator: 'Command+Alt+H',
-              role: 'hideothers'
-            },
-            {
-              label: 'Show All',
-              role: 'unhide'
-            },
-            {
-              type: 'separator'
-            },
-            {
-              label: 'Quit',
-              accelerator: 'Command+Q',
-              click: function() { app.quit(); }
-            }
-          ]
-        });
-        // Window menu.
-        template[3].submenu.push(
-                {
-                  type: 'separator'
-                },
-                {
-                  label: 'Bring All to Front',
-                  role: 'front'
-                }
-        );
-      }
-
-      var menu = Menu.buildFromTemplate(template);
-      Menu.setApplicationMenu(menu);
     </script>
   </body>
 </html>
