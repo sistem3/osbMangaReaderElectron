@@ -3,45 +3,71 @@
   <head>
     <meta charset="UTF-8">
     <title>osbMangaReader</title>
-    <link rel="stylesheet" href="css/osbMangaReader.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="vendor/osb-manga-reader/lib/OsbMangaReader.css">
+    <link rel="stylesheet" href="vendor/swiper/dist/css/swiper.min.css">
+
+    <script src="vendor/swiper/dist/js/swiper.min.js"></script>
+
+    <script src="vendor/zone.js/dist/zone.js"></script>
+    <script src="vendor/reflect-metadata/Reflect.js"></script>
+    <script src="vendor/core-js/client/shim.min.js"></script>
+    <script src="vendor/systemjs/dist/system.src.js"></script>
+
+    <script>
+      var packages = {
+        'app': {main: 'main.js', defaultExtension: 'js'},
+        'rxjs': {defaultExtension: 'js'},
+        'angular2-in-memory-web-api': {defaultExtension: 'js'}
+      };
+      var packageNames = [
+        '@angular/common',
+        '@angular/compiler',
+        '@angular/core',
+        '@angular/http',
+        '@angular/platform-browser',
+        '@angular/platform-browser-dynamic',
+        '@angular/router',
+        '@angular/router-deprecated',
+        '@angular/testing',
+        '@angular/upgrade'
+      ];
+      packageNames.forEach(function (pkgName){
+        packages[pkgName] = {main: 'index.js', defaultExtension: 'js'};
+      });
+      var map = {
+        '@angular': 'vendor/@angular',
+        'rxjs': 'vendor/rxjs',
+        'osb-manga-reader': 'vendor/osb-manga-reader'
+      };
+      var config = {
+        defaultJSExtensions: true,
+        map: map,
+        packages: packages
+      };
+      System.config(config);
+    </script>
+
+    <script src="vendor/rxjs/bundles/Rx.umd.js"></script>
+    <script src="vendor/@angular/core/core.umd.js"></script>
+    <script src="vendor/@angular/common/common.umd.js"></script>
+    <script src="vendor/@angular/compiler/compiler.umd.js"></script>
+    <script src="vendor/@angular/platform-browser/platform-browser.umd.js"></script>
+    <script src="vendor/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js"></script>
+
+    <script>
+      System.import('build/Sandbox').catch(console.log.bind(console));
+    </script>
   </head>
-  <body>
-    <main class="container">
-      <osb-manga-reader></osb-manga-reader>
-    </main>
-
-    <!--<script src="bower_components/system.js/dist/system.js"></script>
-    <script src="node_modules/typescript/lib/typescript.js"></script>
-    <script src="node_modules/angular2/bundles/angular2-polyfills.min.js"></script>
-    <script src="node_modules/rxjs/Rx.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script src="node_modules/angular2/bundles/http.min.js"></script>-->
-
-    <script src="bower_components/system.js/dist/system.js"></script>
-    <script src="https://code.angularjs.org/tools/typescript.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.0/angular2-polyfills.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.0/Rx.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.0/angular2.dev.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.0/http.js"></script>
-
-    <script src="bower_components/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
-    <script src="bower_components/Swiper/dist/js/swiper.min.js"></script>
-    <script src="src/config.js"></script>
-
-    <script>
-      System.config({
-        transpiler: 'typescript',
-        typescriptOptions: { emitDecoratorMetadata: true },
-        packages: {'src': {defaultExtension: 'ts'}}
-      });
-    </script>
-
-    <script>
-      System.import('angular2/platform/browser').then(function(ng){
-        System.import('src/osbMangaReader').then(function(src) {
-          ng.bootstrap(src.osbMangaReader);
-        });
-      });
-    </script>
+  <body override>
+    <wrapper>
+      <osb-manga-reader>
+        <div style="text-align: center; margin: 50px 0;">
+          <i class="fa fa-spinner fa-spin" style="font-size: 21px;"></i> Loading...
+        </div>
+      </osb-manga-reader>
+    </wrapper>
   </body>
 </html>
